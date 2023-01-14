@@ -9,6 +9,8 @@ public class ToadUIObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private ToadInfo toadInfo;
     [SerializeField] private GameObject coinToCollect;
 
+    private bool isChangedSize = false;
+
     private void Start()
     {
         if (toadInfo == null)
@@ -31,9 +33,43 @@ public class ToadUIObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             coinToCollect.SetActive(false);
         }
-
-
+        
     }
+
+    private void ChangeSize()
+    {
+        if (!isChangedSize)
+        {
+            isChangedSize = true;
+            this.gameObject.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+        }
+    }
+
+    private void Update()
+    {
+        if (toadInfo.isCollectable)
+        {
+            coinToCollect.SetActive(true);
+        }
+
+        if (toadInfo.isMature)
+        {
+            ChangeSize();
+
+        }
+
+        if (toadInfo.isBreedable)
+        {
+            //show smth
+        }
+
+        if (toadInfo.isFeedable)
+        {
+            //show smth
+        }
+                
+    }
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -50,15 +86,22 @@ public class ToadUIObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Debug.Log("dropped");
         GameObject droppedObj = eventData.pointerDrag;
 
-        // if (droppedObj.CompareTag("food"))
-        // {
-        //     Debug.Log("dsdssssdsdskjkni");
-        //     toadInfo.stats[ToadInfo.Stats.Hunger] += 15;
-        // }
-        // else
-        // {
-        //     Debug.Log("bruh");
-        // }
+        if (droppedObj.CompareTag("food"))
+        {
+             Debug.Log("dropped food"); 
+             TotalManager.Instance.dynamicFetcherManager.statusActionFetcher.RequestFeed(toadInfo.globalId);
+             //execute logic
+             if (toadInfo.isFeedable)
+             {
+              
+                 toadInfo.isFeedable = false;
+             }
+             else
+             {
+                 //show you cannot do
+             }
+        }
+     
     }
     
     
@@ -70,8 +113,9 @@ public class ToadUIObject : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             toadInfo.isCollectable = false;
             coinToCollect.SetActive(false);
             
-            TotalManager.Instance.uiManager.uiInventory.IncreaseGold(2000);
+            TotalManager.Instance.dynamicFetcherManager.tokenFetcher.RequestCollect(toadInfo.globalId);
             
+
         }
     }
 }

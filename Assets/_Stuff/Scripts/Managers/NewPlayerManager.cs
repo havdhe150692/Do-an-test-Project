@@ -35,6 +35,8 @@ namespace _Stuff.Scripts.Managers
             if (progress >= textToDisplay.Length-1)
             {
                 // Open Guide .setActive(true)
+                TotalManager.Instance.uiManager.uiWaitingForData.SetActive(true);
+                TotalManager.Instance.initialFetcherManager.toadListFetcher.GetAllToad();
                
                 this.gameObject.SetActive(false);
             }
@@ -74,7 +76,7 @@ namespace _Stuff.Scripts.Managers
         public bool CheckIfThisIsNewPlayer()
         {
             if (TotalManager.Instance.dataManager.tokenBalance == 0
-                && TotalManager.Instance.dataManager.toadListJson.Count == 0)
+                && TotalManager.Instance.dataManager.listData.Count == 0)
             {
                 return true;
             }

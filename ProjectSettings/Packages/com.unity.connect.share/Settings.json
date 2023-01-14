@@ -6,7 +6,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"D:/DUYHA_NEW/Unity/Do an test Project/Builds;;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"D:/DUYHA_NEW/Unity/Do an test Project/b8;D:/DUYHA_NEW/Unity/Do an test Project/b7;D:/DUYHA_NEW/Unity/Do an test Project/b6;D:/DUYHA_NEW/Unity/Do an test Project/b5;D:/DUYHA_NEW/Unity/Do an test Project/build4;D:/DUYHA_NEW/Unity/Do an test Project/newbuild3;D:/DUYHA_NEW/Unity/Do an test Project/newbuild2;D:/DUYHA_NEW/Unity/Do an test Project/newBuild;D:/DUYHA_NEW/Unity/Do an test Project/Builds;\"}"
             }
         ]
     }

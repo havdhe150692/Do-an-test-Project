@@ -11,7 +11,7 @@ public class InitialFetcherManager : MonoBehaviour
     private bool isAllDone = true;
 
     [SerializeField] private GameObject loadingScene;
-    private int numberOfBool = 4;
+    private int numberOfBool = 3;
 
     [SerializeField] public PlayerDataFetcher PlayerDataFetcher;
     [SerializeField] public ToadListFetcher toadListFetcher;
@@ -23,7 +23,6 @@ public class InitialFetcherManager : MonoBehaviour
     // 0 =  User Basic Data
     // 1 =  User Total Toad List
     // 2 = Toad Status List
-    // 3 =  Funding
 
 
     public void Awake()
@@ -39,7 +38,7 @@ public class InitialFetcherManager : MonoBehaviour
             if (!CheckIfIsNewPlayer())
             {
                 toadListFetcher.gameObject.SetActive(true);
-                toadStatusFetcher.gameObject.SetActive(true);
+               // toadStatusFetcher.gameObject.SetActive(true);
             }
             else
             {
@@ -55,6 +54,10 @@ public class InitialFetcherManager : MonoBehaviour
         if(c)
         {
             TotalManager.Instance.newPlayerManager.gameObject.SetActive(true);
+        }
+        else
+        {
+            TotalManager.Instance.newPlayerManager.gameObject.SetActive(false);
         }
 
         return c;
@@ -72,7 +75,8 @@ public class InitialFetcherManager : MonoBehaviour
         {
             DisableLoadingSceneAndPlayGame();
             //TEST UiToadPlacement
-            TotalManager.Instance.uiManager.uiToadPlacement.InitialSetup(toadListFetcher.allToadJson, toadStatusFetcher.allToadStatusList);
+           //TotalManager.Instance.uiManager.uiToadPlacement.InitialSetup();
+           // TotalManager.Instance.uiManager.toadDisplayTab.SetUpToadList();
        
         }
         else
@@ -83,7 +87,7 @@ public class InitialFetcherManager : MonoBehaviour
 
     public void DisableLoadingSceneAndPlayGame()
     {
-        TotalManager.Instance.newPlayerManager.gameObject.SetActive(true);
+        //TotalManager.Instance.newPlayerManager.gameObject.SetActive(true);
         loadingScene.SetActive(false);
         
     }

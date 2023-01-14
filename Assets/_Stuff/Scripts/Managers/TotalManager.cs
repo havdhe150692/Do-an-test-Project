@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using _Stuff.Scripts.Managers;
 using UnityEngine;
 
@@ -14,10 +15,18 @@ public class TotalManager : MonoBehaviour
    [SerializeField] public DynamicFetcherManager dynamicFetcherManager;
    [SerializeField] public DataManager dataManager;
    [SerializeField] public NewPlayerManager newPlayerManager;
+   
+   [DllImport("__Internal")]
+   private static extern string GetUserID();
    private void Awake()
    {
       Instance = this;
+    
    }
-
+   
+   public void SetUserId(int userId)
+   {
+      dataManager.userId = userId;
+   }
  
 }

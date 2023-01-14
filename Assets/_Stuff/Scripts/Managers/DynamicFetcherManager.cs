@@ -8,4 +8,5 @@ public class DynamicFetcherManager : MonoBehaviour
     [SerializeField] public ToadSoloDetailFetcher toadSoloDetailFetcher;
     [SerializeField] public ToadGenerationFetcher toadGenerationFetcher;
     [SerializeField] public TokenFetcher tokenFetcher;
+    [SerializeField] public StatusActionFetcher statusActionFetcher;
 }

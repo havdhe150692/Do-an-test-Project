@@ -8,12 +8,10 @@ using UnityEngine.UI;
 
 public class ToadListPaging : MonoBehaviour
 {
- 
-    private int numberOfPage;
+    private List<ToadInfoData> allToadData => TotalManager.Instance.dataManager.listData;
+    private int numberOfPage => (allToadData.Count + 6 - 1) / 6;
     private int currentPage;
 
-
-    private List<ToadListJson> allToadJson;
     [SerializeField] public ToadListDisplayPage displaypage;
     //[SerializeField] private ToadListFetcher fetcher;
 
@@ -27,27 +25,29 @@ public class ToadListPaging : MonoBehaviour
         lastButton.onClick.AddListener(LastPage);
     }
 
-
-    public void ReceiveFromJson(List<ToadListJson> toadjsonList)
-    {
-        allToadJson = toadjsonList;
-        numberOfPage = (allToadJson.Count + 6 - 1) / 6;
-    }
-
     private void Start()
     {
         StartPage();
-        foreach (var VARIABLE in allToadJson)
+        foreach (var VARIABLE in allToadData)
         {
             Debug.Log(VARIABLE.ToString());
         }
     }
 
+    public void SetUpData()
+    {
+        StartPage();
+    }
+
     private void StartPage()
     {
         currentPage = 1;
-        displaypage.FetchData(allToadJson, currentPage);
+        displaypage.FetchData(currentPage);
         lastButton.interactable = false;
+        if (currentPage == numberOfPage)
+        {
+            nextButton.interactable = false;
+        }
         //fetcher.GetAllToadOfThisPage(currentPage);
     }
 
@@ -63,7 +63,7 @@ public class ToadListPaging : MonoBehaviour
         {
             nextButton.interactable = false;
         }
-        displaypage.FetchData(allToadJson, currentPage);
+        displaypage.FetchData(currentPage);
         
         if (currentPage > 1)
         {
@@ -89,7 +89,7 @@ public class ToadListPaging : MonoBehaviour
         {
             nextButton.interactable = true;
         }
-        displaypage.FetchData(allToadJson, currentPage);
+        displaypage.FetchData(currentPage);
         
         //fetcher.GetAllToadOfThisPage(currentPage);
     }

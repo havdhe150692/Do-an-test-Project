@@ -31,7 +31,7 @@ public class ToadSoloDetailFetcher : MonoBehaviour
             {
                 string txt = www.downloadHandler.text;
                 ToadDetailJson toadDetailJson = JsonConvert.DeserializeObject<ToadDetailJson>(txt);
-                TotalManager.Instance.uiManager.toadSoloInfo.ReceiveFromJson(toadDetailJson);
+               // TotalManager.Instance.uiManager.toadSoloInfo.ReceiveFromJson(toadDetailJson);
             }
         }
     }

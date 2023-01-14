@@ -7,18 +7,21 @@ public class UiToadPlacement : MonoBehaviour
 {
     [SerializeField] private List<ToadInfo> toadObjList;
 
-    public void InitialSetup(List<ToadListJson> toad, List<ToadStatusJson> toadStatusList)
+    public void InitialSetup()
     {
-        for (int i = 0; i < toad.Count; i++)
-            {
-            var toadListJson = toad[i];
+        var listData = TotalManager.Instance.dataManager.listData;
+        var statusData = TotalManager.Instance.dataManager.statusData;
+        Debug.Log("listData = " + listData.Count); 
+        Debug.Log("statusDate = " + statusData.Count);
+        
+        for (int i = 0; i < listData.Count; i++)
+        {
+            var toadListJson = listData[i];
             toadObjList[i].gameObject.SetActive(true);
-            
-            if(!(toadStatusList.Count < i))
-            {
-                toadObjList[i].FetchFromToadStatusJson(toadStatusList[i]); 
-                toadObjList[i].gameObject.GetComponent<ToadUIObject>().InitialSetup();
-            }
+            toadObjList[i].FetchFromToadListJson(listData[i]); 
+            toadObjList[i].FetchFromToadStatusJson(statusData[i]); 
+            toadObjList[i].gameObject.GetComponent<ToadUIObject>().InitialSetup();
+            Debug.Log("UiToadPlacement = " + i);
 
         }
     }

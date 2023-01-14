@@ -12,6 +12,10 @@ public class UiToadDisplayTab : MonoBehaviour
     [SerializeField] public GameObject totalBoard;
     //[SerializeField] public GameObject blackBG;
 
+    public void SetUpToadList()
+    {
+        pagingController.SetUpData();
+    }
 
     private void Start()
     {

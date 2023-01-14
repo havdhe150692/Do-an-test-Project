@@ -15,7 +15,7 @@ public class UiActionBarObject : MonoBehaviour, IBeginDragHandler, IEndDragHandl
     {
         rectTransform = GetComponent<RectTransform>();
         initialposition = rectTransform;
-        // = GameObject.Find("UICanvas").GetComponent<Canvas>();
+        canvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -25,8 +25,12 @@ public class UiActionBarObject : MonoBehaviour, IBeginDragHandler, IEndDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+
+       GameObject g = Instantiate(this.gameObject, this.gameObject.transform.parent);
+       g.transform.localScale = this.gameObject.transform.localScale;
+       g.transform.position = this.gameObject.transform.position;
+       g.transform.parent = this.gameObject.transform.parent;
        
-        
     }
 
     public void OnEndDrag(PointerEventData eventData)

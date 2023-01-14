@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,10 @@ public class UIEggUnboxing : MonoBehaviour
     [SerializeField] private Image eggImg;
     [SerializeField] private Image brokenEggImg;
     
-    void Start()
+    private void OnEnable()
     {
+        brokenEggImg.gameObject.SetActive(false);
+        eggImg.gameObject.SetActive(true);
         StartCoroutine(UnboxingEgg());
     }
 

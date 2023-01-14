@@ -12,16 +12,17 @@ public class PlayerDataFetcher : MonoBehaviour
 {
     private String userName;
     private String getURL = "http://localhost:8080/userData/";
-    [SerializeField] private int id;
+    [SerializeField] public int id;
     [FormerlySerializedAs("text")] [SerializeField] private Text nameText;
 
     private void Awake()
     {
-        getURL += id;
     }
 
     private void Start()
     {
+        id = TotalManager.Instance.dataManager.userId;
+        getURL += id;
         StartCoroutine(GetText());
     }
     

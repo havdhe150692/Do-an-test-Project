@@ -1,10 +1,12 @@
 using System;
+using UnityEngine;
 
 namespace _Stuff.Scripts.Objects
 {
     public class ToadInfoData
     {
         public int globalId;
+        public int dataId;
         public string name;
         public ToadInfo.Rarity rarity;
         public string info;
@@ -13,4 +15,4 @@ namespace _Stuff.Scripts.Objects
         public DateTime dob;
 
     }
-}
+}   

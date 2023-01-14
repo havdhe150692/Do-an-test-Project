@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _Stuff.Scripts.Objects;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 //[CreateAssetMenu(fileName = "ToadData", menuName = "ScriptableObjects/ToadDataSO", order = 1)]
 public class ToadInfo : MonoBehaviour
@@ -16,6 +17,8 @@ public class ToadInfo : MonoBehaviour
     //     Growing
     // }
     //
+    
+    
     public enum  Rarity
     {
         Common,
@@ -24,11 +27,12 @@ public class ToadInfo : MonoBehaviour
         Mythical,
         Legendary
     }
-    
+
+    [SerializeField] public int globalId;
     [SerializeField]  public String toadName;
-    [SerializeField]  public DateTime dOb;
-    [SerializeField]  public bool isGrown;
+    [SerializeField]  public TimeSpan age;
     [SerializeField]  public Rarity rarity;
+    [SerializeField] public Image imageShow;
 
     public bool isMature;
     public bool isCollectable;
@@ -40,28 +44,49 @@ public class ToadInfo : MonoBehaviour
     public float remainCollect;
     public float remainBreed;
 
-    public void FetchFromToadListJson(ToadListJson toadListJson)
+    public void SetupImageWithDataId(int id)
     {
-        this.name = toadListJson.name;
-        this.rarity = toadListJson.rarity;
-    
+        Debug.Log("dataid is " + id);
+        imageShow.sprite = TotalManager.Instance.dataManager.imagesSource.spriteList[id - 1];
+        
+    }
+
+    public void FetchFromToadListJson(ToadInfoData toadInfoData)
+    {
+        this.globalId = toadInfoData.globalId;
+        this.toadName = toadInfoData.name;
+        this.rarity = toadInfoData.rarity;
+        SetupImageWithDataId(toadInfoData.dataId);
+        
+        DateTime now = DateTime.Now;
+        age = ( now - toadInfoData.dob);
+        TotalManager.Instance.dataManager.toadInfos.TryGetValue(toadInfoData.globalId, out ToadInfo t);
+        if (t == null)
+        {
+            TotalManager.Instance.dataManager.toadInfos.Add(toadInfoData.globalId, this);
+        }
+        else
+        {
+            TotalManager.Instance.dataManager.toadInfos[toadInfoData.globalId] = this;
+        }
+
+        // this.age = toadInfoData.dob;
     }
     
-    public void FetchFromToadStatusJson(ToadStatusJson toadStatusJson)
+    public void FetchFromToadStatusJson(ToadInfoStatus toadInfoStatus)
     {
         DateTime now = DateTime.Now;
-        DateTime expectedMatureDate = DateTime.ParseExact(toadStatusJson.expectedMature, "yyyy-MM-ddTHH:mm:ss.fffzzz", System.Globalization.CultureInfo.InvariantCulture);
-        DateTime expectedHungryDate = DateTime.ParseExact(toadStatusJson.expectedHungry, "yyyy-MM-ddTHH:mm:ss.fffzzz", System.Globalization.CultureInfo.InvariantCulture);
-        DateTime expectedCollectDate = DateTime.ParseExact(toadStatusJson.expectedCollect, "yyyy-MM-ddTHH:mm:ss.fffzzz", System.Globalization.CultureInfo.InvariantCulture);
-        DateTime expectedBreedDate = DateTime.ParseExact(toadStatusJson.expectedBreed, "yyyy-MM-ddTHH:mm:ss.fffzzz", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime expectedMatureDate = toadInfoStatus.expectedMature;
+        DateTime expectedHungryDate = toadInfoStatus.expectedHungry;
+        DateTime expectedCollectDate = toadInfoStatus.expectedCollect;
+        DateTime expectedBreedDate = toadInfoStatus.expectedBreed;
 
         remainMature = (float) (expectedMatureDate - now).TotalSeconds; 
         remainHungry = (float) (expectedHungryDate - now).TotalSeconds; 
         remainCollect = (float) (expectedCollectDate - now).TotalSeconds;
         remainBreed = (float) (expectedBreedDate - now).TotalSeconds;
         
-      
-        Debug.Log(toadName + " " +remainCollect);
+       Debug.Log(toadName + " expected breed: " + expectedBreedDate);
   
         
         if (remainMature < 0)
@@ -107,22 +132,43 @@ public class ToadInfo : MonoBehaviour
         if (remainMature > 0)
         {
             remainMature -= Time.deltaTime;
+            isMature = false;
+        }
+        else
+        {
+            isMature = true;
         }
 
         if (remainHungry > 0)
         {
             remainHungry -= Time.deltaTime;
+            isFeedable = false;
+        }
+        else
+        {
+            isFeedable = true;
         }
         
         if (remainCollect > 0)
         {
             remainCollect -= Time.deltaTime;
+            isCollectable = false;
+        }
+        else
+        {
+            isCollectable = true;
         }
         
         if (remainBreed > 0)
         {
             remainBreed -= Time.deltaTime;
+            isBreedable = false;
         }
+        else
+        {
+            isBreedable = true;
+        }
+        
         
         
     }

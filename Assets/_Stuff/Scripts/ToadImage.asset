@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b862c436bf28d8b4f8fa2890f45a49fa, type: 3}
+  m_Name: ToadImage
+  m_EditorClassIdentifier: 
+  spriteList:
+  - {fileID: 21300000, guid: 353e83bc587a78b4aa275c25a6f51fe7, type: 3}
+  - {fileID: 21300000, guid: b5a9397de36c01f428743b7f29f84d64, type: 3}
+  - {fileID: 21300000, guid: 8040d83e35a45da458f401e8f0c11079, type: 3}
+  - {fileID: 21300000, guid: 734724a30aef9204684d111fa836c8d9, type: 3}
+  - {fileID: 21300000, guid: f8a25de805db4894fac9c5e7bd62815e, type: 3}
+  - {fileID: 21300000, guid: 38c19411c5d80cd4b85a4401eb8e44f0, type: 3}
+  - {fileID: 21300000, guid: 965031926aadc054da5e09904da1447a, type: 3}
+  - {fileID: 21300000, guid: dd132658e15d70c4c85b37423c986fdd, type: 3}
+  - {fileID: 21300000, guid: 26566f7f64e1049439f35c9042f28186, type: 3}
+  - {fileID: 21300000, guid: 6773311fd2a402f4e8473db426714b6e, type: 3}
+  - {fileID: 21300000, guid: 5249cac6d8b718b4ca474dd19137217a, type: 3}
+  - {fileID: 21300000, guid: 3871301f5d7ff5c44b962408d3be8de6, type: 3}
+  toad1: {fileID: 21300000, guid: 353e83bc587a78b4aa275c25a6f51fe7, type: 3}
+  toad2: {fileID: 21300000, guid: b5a9397de36c01f428743b7f29f84d64, type: 3}
+  toad3: {fileID: 21300000, guid: 8040d83e35a45da458f401e8f0c11079, type: 3}
+  toad4: {fileID: 21300000, guid: 734724a30aef9204684d111fa836c8d9, type: 3}
+  toad5: {fileID: 21300000, guid: f8a25de805db4894fac9c5e7bd62815e, type: 3}
+  toad6: {fileID: 21300000, guid: 38c19411c5d80cd4b85a4401eb8e44f0, type: 3}
+  toad7: {fileID: 21300000, guid: 965031926aadc054da5e09904da1447a, type: 3}
+  toad8: {fileID: 21300000, guid: dd132658e15d70c4c85b37423c986fdd, type: 3}
+  toad9: {fileID: 21300000, guid: 26566f7f64e1049439f35c9042f28186, type: 3}
+  toad10: {fileID: 21300000, guid: 6773311fd2a402f4e8473db426714b6e, type: 3}
+  toad11: {fileID: 21300000, guid: 5249cac6d8b718b4ca474dd19137217a, type: 3}
+  toad12: {fileID: 21300000, guid: 3871301f5d7ff5c44b962408d3be8de6, type: 3}
